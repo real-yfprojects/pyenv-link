@@ -15,9 +15,12 @@ set -e
 # Provide pyenv completions
 case "$1" in
 --complete)
-    echo --version
-    pyenv-link-version --complete
-    exit
+    if [ -z "$2" ]; then
+        echo version
+    else
+        shift 2
+        pyenv-link-version --complete "$@"
+    fi
     ;;
 version)
     shift
