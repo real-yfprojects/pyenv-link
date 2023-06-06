@@ -121,7 +121,7 @@ if [ -z "$venv_name" ]; then
 fi
 
 # check whether version exists already
-if pyenv-prefix "$venv_name"; then
+if pyenv-prefix "$venv_name" >/dev/null 2>&1; then
     echo Version "$venv_name" already exists >&2
     exit 3
 fi
