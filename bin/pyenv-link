@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Summary: Activate virtual environment
+#
+# Usage: pyenv link version <virtualenv>
+#
+# Link a virtual python environment to pyenvs version directory
+# so that the venv can be used like one created with *pyenv-virtualenv*.
+#
+# <virtualenv> should be a path to a virtual python environments location.
+
+set -e
+[ -n "$PYENV_DEBUG" ] && set -x
+
+# Provide pyenv completions
+case "$1" in
+--complete)
+    echo --version
+    pyenv-link-version --complete
+    exit
+    ;;
+version)
+    shift
+    pyenv-link-version "$@"
+    exit $?
+    ;;
+*)
+    pyenv-help --usage link >&2
+    exit 1
+    ;;
+esac
