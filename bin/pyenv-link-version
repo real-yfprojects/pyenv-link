@@ -134,6 +134,7 @@ if [ -z "$dry" ]; then
     # Handle OS types
     case "$(uname -s)" in
         Darwin*)
+            # long form flags aren't supported
             ln -s "$venv_dir" "$pyenv_prefix_path";;
         *)
             ln --symbolic "$venv_dir" "$pyenv_prefix_path";;
