@@ -131,7 +131,14 @@ pyenv_prefix_path="$PYENV_ROOT/versions/$venv_name"
 
 # link to pyenv version directory
 if [ -z "$dry" ]; then
-    ln --symbolic "$venv_dir" "$pyenv_prefix_path"
+    # Handle OS types
+    case "$(uname -s)" in
+        Darwin*)
+            # long form flags aren't supported
+            ln -s "$venv_dir" "$pyenv_prefix_path";;
+        *)
+            ln --symbolic "$venv_dir" "$pyenv_prefix_path";;
+    esac
 fi
 
 # output
